@@ -1,0 +1,1 @@
+recursive-include hass_configurator *.py *.html *.js *.css *.woff2

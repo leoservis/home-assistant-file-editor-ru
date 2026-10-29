@@ -1,0 +1,907 @@
+/* ============================================================
+   CSS Custom Properties – Light (default) and Dark themes
+   The [data-theme] attribute is set on <html> by JS on load.
+   "auto" mode relies on prefers-color-scheme only.
+   ============================================================ */
+
+:root {
+    --bg:              #fafafa;
+    --bg-alt:          #f5f5f5;
+    --surface:         #ffffff;
+    --surface-alt:     #eeeeee;
+    --border:          #eeeeee;
+    --nav-bg:          #03a9f4;   /* light-blue */
+    --nav-text:        #ffffff;
+    --sidebar-bg:      #ffffff;
+    --sidebar-text:    #616161;
+    --sidebar-header:  #424242;
+    --sidebar-border:  #eeeeee;
+    --sidebar-hover:   #e0e0e0;
+    --text:            #616161;
+    --text-dark:       #424242;
+    --text-muted:      #757575;
+    --dropdown-bg:     #ffffff;
+    --dropdown-text:   #616161;
+    --modal-bg:        #ffffff;
+    --modal-text:      #616161;
+    --input-border:    #03a9f4;
+    --accent:          #03a9f4;
+    --accent-hover:    #0288d1;
+    --search-bg:       #eeeeee;
+    --search-form-bg:  #fafafa;
+    --search-text:     #424242;
+    --ace-search-bg:   #eeeeee;
+    --shadow-color:    rgba(0,0,0,0.14);
+}
+
+/* Dark theme values */
+[data-theme="dark"] {
+    --bg:              #1e1e1e;
+    --bg-alt:          #252525;
+    --surface:         #2d2d2d;
+    --surface-alt:     #333333;
+    --border:          #3a3a3a;
+    --nav-bg:          #1a1a2e;
+    --nav-text:        #e0e0e0;
+    --sidebar-bg:      #252525;
+    --sidebar-text:    #b0b0b0;
+    --sidebar-header:  #cccccc;
+    --sidebar-border:  #3a3a3a;
+    --sidebar-hover:   #383838;
+    --text:            #b0b0b0;
+    --text-dark:       #cccccc;
+    --text-muted:      #888888;
+    --dropdown-bg:     #2d2d2d;
+    --dropdown-text:   #b0b0b0;
+    --modal-bg:        #2d2d2d;
+    --modal-text:      #cccccc;
+    --input-border:    #4fc3f7;
+    --accent:          #4fc3f7;
+    --accent-hover:    #29b6f6;
+    --search-bg:       #333333;
+    --search-form-bg:  #2d2d2d;
+    --search-text:     #cccccc;
+    --ace-search-bg:   #333333;
+    --shadow-color:    rgba(0,0,0,0.4);
+}
+
+/* Auto dark mode via system preference (only when no explicit theme is set) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+        --bg:              #1e1e1e;
+        --bg-alt:          #252525;
+        --surface:         #2d2d2d;
+        --surface-alt:     #333333;
+        --border:          #3a3a3a;
+        --nav-bg:          #1a1a2e;
+        --nav-text:        #e0e0e0;
+        --sidebar-bg:      #252525;
+        --sidebar-text:    #b0b0b0;
+        --sidebar-header:  #cccccc;
+        --sidebar-border:  #3a3a3a;
+        --sidebar-hover:   #383838;
+        --text:            #b0b0b0;
+        --text-dark:       #cccccc;
+        --text-muted:      #888888;
+        --dropdown-bg:     #2d2d2d;
+        --dropdown-text:   #b0b0b0;
+        --modal-bg:        #2d2d2d;
+        --modal-text:      #cccccc;
+        --input-border:    #4fc3f7;
+        --accent:          #4fc3f7;
+        --accent-hover:    #29b6f6;
+        --search-bg:       #333333;
+        --search-form-bg:  #2d2d2d;
+        --search-text:     #cccccc;
+        --ace-search-bg:   #333333;
+        --shadow-color:    rgba(0,0,0,0.4);
+    }
+}
+
+/* ============================================================
+   Base layout
+   ============================================================ */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* ============================================================
+   Navbar / Toolbar
+   Override Materialize .light-blue with maximum specificity
+   ============================================================ */
+
+nav,
+nav.light-blue,
+.navbar-fixed nav,
+.navbar-fixed nav.light-blue,
+header .navbar-fixed nav,
+header nav {
+    background-color: var(--nav-bg) !important;
+    color: var(--nav-text) !important;
+    box-shadow: 0 2px 4px var(--shadow-color) !important;
+}
+
+nav a,
+nav .nav-wrapper a,
+nav i.material-icons,
+nav .nav-wrapper i.material-icons,
+.navbar-fixed nav a,
+.navbar-fixed nav i {
+    color: var(--nav-text) !important;
+}
+
+/* Filepath bar / current file input area */
+.nav-wrapper .input-field input,
+nav .input-field input,
+nav input {
+    color: var(--nav-text) !important;
+    border-bottom-color: var(--nav-text) !important;
+}
+
+/* Active / hover states in nav */
+nav ul a:hover,
+nav ul li.active a {
+    background-color: rgba(255,255,255,0.15) !important;
+}
+
+/* ============================================================
+   Override ALL Materialize grey/white utility classes
+   These are hardcoded in HTML and beat our CSS variables
+   ============================================================ */
+
+.grey.lighten-4,
+.grey.lighten-3,
+.grey.lighten-2,
+.grey.lighten-1,
+ul.grey.lighten-4,
+div.grey.lighten-4,
+li.grey.lighten-4 {
+    background-color: var(--surface) !important;
+}
+
+/* Filepath card bar */
+.card.grey.lighten-4,
+.card.input-field.grey.lighten-4,
+div.card.input-field.col.grey.lighten-4 {
+    background-color: var(--surface-alt) !important;
+    box-shadow: none !important;
+}
+
+/* Filepath input text */
+.currentfile_input,
+input#currentfile {
+    color: var(--text-dark) !important;
+    background-color: transparent !important;
+}
+
+/* Sidebar toolbar rows */
+ul.row.no-padding.center.grey.lighten-4,
+ul.row.center.toolbar_mobile.grey.lighten-4,
+#slide-out.grey.lighten-4,
+ul#slide-out.side-nav.grey.lighten-4 {
+    background-color: var(--sidebar-bg) !important;
+}
+
+/* Grey icons in sidebar toolbar */
+.grey-text.text-darken-2,
+i.grey-text.text-darken-2 {
+    color: var(--text-muted) !important;
+}
+
+/* Tables in modals */
+table,
+table.bordered,
+table.highlight,
+table thead,
+table tbody tr {
+    background-color: var(--modal-bg) !important;
+    color: var(--modal-text) !important;
+    border-color: var(--border) !important;
+}
+
+table.highlight tbody tr:hover {
+    background-color: var(--surface-alt) !important;
+}
+
+/* Card panels */
+.card-panel {
+    background-color: var(--surface) !important;
+    color: var(--text) !important;
+}
+
+/* Chips / badges */
+.chip {
+    background-color: var(--surface-alt) !important;
+    color: var(--text) !important;
+}
+
+/* ============================================================
+   HA Entities panel (left column: Trigger platforms, Events…)
+   ============================================================ */
+
+#hass_menu_l {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+/* Native <select> elements */
+select,
+select option {
+    background-color: var(--surface) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--border) !important;
+}
+
+/* Materialize styled select dropdowns (the UL overlay) */
+ul.select-dropdown,
+ul.select-dropdown li,
+ul.select-dropdown li span,
+.select-dropdown.dropdown-content,
+.select-dropdown.dropdown-content li,
+.select-dropdown.dropdown-content li span {
+    background-color: var(--dropdown-bg) !important;
+    color: var(--dropdown-text) !important;
+}
+
+.select-dropdown.dropdown-content li:hover,
+.select-dropdown.dropdown-content li.selected {
+    background-color: var(--surface-alt) !important;
+}
+
+/* Materialize input-field label colors */
+.input-field label,
+.input-field .label-icon {
+    color: var(--text-muted) !important;
+}
+
+.input-field label.active {
+    color: var(--accent) !important;
+}
+
+/* Autocomplete dropdown */
+.autocomplete-content,
+.autocomplete-content li,
+.autocomplete-content li span {
+    background-color: var(--dropdown-bg) !important;
+    color: var(--dropdown-text) !important;
+}
+
+/* Editor Settings subheader */
+li.grey.lighten-3.subheader,
+.subheader {
+    background-color: var(--surface-alt) !important;
+    color: var(--text-muted) !important;
+}
+
+/* Branch selector dropdown */
+ul#branches.grey.lighten-4,
+ul.branch_select.grey.lighten-4 {
+    background-color: var(--surface) !important;
+}
+
+/* About / action cards (grey lighten-3) */
+.card.grey.lighten-3,
+div.card.grey.lighten-3 {
+    background-color: var(--surface) !important;
+    color: var(--text) !important;
+}
+
+/* Generic .card */
+.card,
+.card .card-content,
+.card .card-action {
+    background-color: var(--surface) !important;
+    color: var(--text) !important;
+}
+
+/* Preloader overrides for dark bg */
+.preloader-background {
+    background-color: var(--bg) !important;
+}
+
+/* ============================================================
+   Dropdowns
+   ============================================================ */
+
+.dropdown-content {
+    background-color: var(--dropdown-bg) !important;
+}
+
+.dropdown-content li > a,
+.dropdown-content li > span {
+    color: var(--dropdown-text) !important;
+}
+
+.dropdown-content li:hover,
+.dropdown-content li > a:hover {
+    background-color: var(--surface-alt) !important;
+}
+
+.dropdown-content .divider {
+    background-color: var(--border) !important;
+}
+
+/* ============================================================
+   Sidebar / Filebrowser
+   ============================================================ */
+
+#filebrowser {
+    background-color: var(--sidebar-bg);
+}
+
+#fbheader {
+    display: block;
+    cursor: initial;
+    pointer-events: none;
+    color: var(--sidebar-header) !important;
+    font-weight: 400;
+    font-size: .9em;
+    min-height: 64px;
+    padding-top: 8px;
+    margin-left: -5px;
+    max-width: 250px;
+}
+
+#fbheaderbranch {
+    padding: 5px 10px !important;
+    display: none;
+    color: var(--text-muted) !important;
+}
+
+#branchselector {
+    font-weight: 400;
+}
+
+a.branch_select.active {
+    color: white !important;
+}
+
+#fbelements {
+    margin: 0;
+    position: relative;
+}
+
+a.collection-item {
+    color: var(--sidebar-text) !important;
+}
+
+.fbtoolbarbutton {
+    color: var(--text-muted) !important;
+    min-height: 64px !important;
+}
+
+.fbmenubutton {
+    color: var(--sidebar-text) !important;
+    display: inline-block;
+    float: right;
+    min-height: 64px;
+    padding-top: 8px !important;
+    padding-left: 20px !important;
+}
+
+.filename {
+    color: var(--sidebar-text) !important;
+    font-weight: 400;
+    display: inline-block;
+    width: 182px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.collection {
+    margin: 0;
+    background-color: var(--sidebar-bg);
+}
+
+li.collection-item {
+    border-bottom: 1px solid var(--sidebar-border) !important;
+    background-color: var(--sidebar-bg) !important;
+    color: var(--sidebar-text) !important;
+}
+
+li.collection-item:hover,
+li.collection-item.active {
+    background-color: var(--surface-alt) !important;
+}
+
+.collection-item #uplink {
+    background-color: var(--bg-alt);
+    width: 323px !important;
+    margin-left: -3px !important;
+}
+
+/* ============================================================
+   Side nav / slide-out
+   ============================================================ */
+
+.side-nav,
+#slide-out {
+    background-color: var(--sidebar-bg) !important;
+    width: 337px !important;
+    height: 100% !important;
+}
+
+.fb_side-nav li {
+    line-height: 36px;
+}
+
+.fb_side-nav a {
+    padding: 0 0 0 16px;
+    display: inline-block !important;
+    color: var(--sidebar-text) !important;
+}
+
+.fb_side-nav li > a > i {
+    margin-right: 16px !important;
+    cursor: pointer;
+}
+
+/* ============================================================
+   Collapsible / Ace settings panel
+   ============================================================ */
+
+.collapsible {
+    background-color: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.collapsible-header {
+    background-color: var(--surface) !important;
+    color: var(--text-dark) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.collapsible-header:hover {
+    background-color: var(--surface-alt) !important;
+}
+
+.collapsible-body {
+    background-color: var(--surface) !important;
+    color: var(--text) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.collapsible-body label,
+.collapsible-body span {
+    color: var(--text) !important;
+}
+
+/* ============================================================
+   Modals
+   ============================================================ */
+
+.modal {
+    background-color: var(--modal-bg) !important;
+    color: var(--modal-text) !important;
+}
+
+.modal .modal-content,
+.modal .modal-footer {
+    background-color: var(--modal-bg) !important;
+    color: var(--modal-text) !important;
+}
+
+.modal .modal-footer {
+    border-top: 1px solid var(--border) !important;
+}
+
+.modal h4, .modal h5, .modal p, .modal label {
+    color: var(--modal-text) !important;
+}
+
+#modal_acekeyboard {
+    top: auto;
+    width: 96%;
+    min-height: 96%;
+    border-radius: 0;
+    margin: auto;
+}
+
+.modal .modal-content_nopad {
+    padding: 0;
+}
+
+/* ============================================================
+   Forms / Inputs inside modals and panels
+   ============================================================ */
+
+input[type=text],
+input[type=password],
+textarea,
+select {
+    color: var(--text-dark) !important;
+    background-color: transparent !important;
+}
+
+input.currentfile_input {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 5px;
+    border-bottom: 0;
+    color: var(--text-dark) !important;
+}
+
+label {
+    color: var(--text-muted) !important;
+}
+
+.input-field input:focus + label,
+.input-field textarea:focus + label {
+    color: var(--accent) !important;
+}
+
+.input-field input[type=text].valid,
+.input-field input[type=text]:focus,
+.input-field input[type=password].valid,
+.input-field input[type=password]:focus,
+.input-field textarea:focus {
+    border-bottom: 1px solid var(--accent) !important;
+    box-shadow: 0 1px 0 0 var(--accent) !important;
+}
+
+.select-wrapper input.select-dropdown {
+    width: 96%;
+    overflow: hidden;
+    direction: ltr;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-dark) !important;
+}
+
+/* Checkbox colors */
+.blue_check:checked + label:before {
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+    z-index: 10;
+    background-color: var(--surface) !important;
+    color: var(--text) !important;
+}
+
+/* ============================================================
+   Misc layout
+   ============================================================ */
+
+#editor {
+    position: fixed;
+    top: 135px;
+    right: 0;
+    bottom: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    #editor {
+        top: 125px;
+    }
+    .toolbar_mobile {
+        margin-bottom: 0;
+    }
+}
+
+.leftellipsis {
+    overflow: hidden;
+    direction: rtl;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#edit_float {
+    z-index: 10;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.text_darkgreen {
+    color: #1b5e20 !important;
+}
+
+.text_darkred {
+    color: #b71c1c !important;
+}
+
+span.stats {
+    margin: -10px 0 0 0;
+    padding: 0;
+    font-size: 0.5em;
+    color: var(--text) !important;
+    line-height: 16px;
+    display: inherit;
+}
+
+.side_tools {
+    vertical-align: middle;
+}
+
+.fbtoolbarbutton_icon {
+    margin-top: 20px;
+}
+
+.green {
+    color: #fff;
+}
+
+.red {
+    color: #fff;
+}
+
+#file_history, #dropdown_menu, #dropdown_menu_mobile {
+    min-width: 235px;
+}
+
+#dropdown_gitmenu {
+    min-width: 140px !important;
+}
+
+.fb_dd {
+    margin-left: -15px !important;
+}
+
+.hidesave {
+    opacity: 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.pathtip_color {
+    -webkit-animation: fadeinout 1.75s linear 1 forwards;
+    animation: fadeinout 1.75s linear 1 forwards;
+}
+
+@-webkit-keyframes fadeinout {
+    0%   { background-color: var(--bg-alt); }
+    50%  { background-color: #ff8a80; }
+    100% { background-color: var(--bg-alt); }
+}
+@keyframes fadeinout {
+    0%   { background-color: var(--bg-alt); }
+    50%  { background-color: #ff8a80; }
+    100% { background-color: var(--bg-alt); }
+}
+
+#lint-status {
+    position: absolute;
+    top: 0.75rem;
+    right: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+#modal_lint.modal {
+    width: 80%;
+}
+
+#modal_lint textarea {
+    resize: none;
+    height: auto;
+}
+
+/* ============================================================
+   Preloader
+   ============================================================ */
+
+.preloader-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg);
+    position: fixed;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* ============================================================
+   Ace search UI
+   ============================================================ */
+
+.ace_search {
+    background-color: var(--ace-search-bg) !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    box-shadow: 0 6px 10px 0 var(--shadow-color), 0 1px 18px 0 var(--shadow-color), 0 3px 5px -1px rgba(0,0,0,0.3);
+}
+
+.ace_search_form {
+    background-color: var(--search-form-bg);
+    width: 300px;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: 0 2px 2px 0 var(--shadow-color), 0 1px 5px 0 var(--shadow-color), 0 2px 1px -2px rgba(0,0,0,0.2);
+    margin-bottom: 15px !important;
+    margin-left: 8px !important;
+    color: var(--search-text) !important;
+}
+
+.ace_search_field {
+    padding-left: 4px !important;
+    margin-left: 10px !important;
+    max-width: 275px !important;
+    font-family: 'Roboto', sans-serif !important;
+    border-bottom: 1px solid var(--accent) !important;
+    color: var(--search-text) !important;
+}
+
+.ace_replace_form {
+    background-color: var(--search-form-bg);
+    width: 300px;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: 0 2px 2px 0 var(--shadow-color), 0 1px 5px 0 var(--shadow-color), 0 2px 1px -2px rgba(0,0,0,0.2);
+    margin-bottom: 15px !important;
+    margin-left: 8px !important;
+}
+
+.ace_search_options {
+    background-color: var(--surface-alt);
+    text-align: left !important;
+    letter-spacing: .5px !important;
+    transition: .2s ease-out;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 130%;
+    top: 0 !important;
+}
+
+.ace_searchbtn {
+    text-decoration: none !important;
+    min-width: 40px !important;
+    min-height: 30px !important;
+    color: var(--search-text) !important;
+    text-align: center !important;
+    letter-spacing: .5px !important;
+    transition: .2s ease-out;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.ace_searchbtn:hover {
+    background-color: var(--accent);
+}
+
+.ace_replacebtn {
+    text-decoration: none !important;
+    min-width: 40px !important;
+    min-height: 30px !important;
+    color: var(--search-text) !important;
+    text-align: center !important;
+    letter-spacing: .5px !important;
+    transition: .2s ease-out;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.ace_replacebtn:hover {
+    background-color: var(--accent);
+}
+
+.ace_button {
+    text-decoration: none !important;
+    min-width: 40px !important;
+    min-height: 30px !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    color: var(--search-text) !important;
+    background-color: var(--search-form-bg);
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.ace_button:hover {
+    background-color: var(--accent) !important;
+}
+
+.ace_invisible {
+    color: rgba(191, 191, 191, 0.5) !important;
+}
+
+.ace_optionsMenuEntry input {
+    position: relative !important;
+    left: 0 !important;
+    opacity: 1 !important;
+}
+
+.ace_optionsMenuEntry select {
+    position: relative !important;
+    left: 0 !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+/* ============================================================
+   Misc icon sizing
+   ============================================================ */
+
+.fbicon_pad {
+    min-height: 64px !important;
+}
+
+.fbmenuicon_pad {
+    min-height: 64px;
+    margin-top: 6px !important;
+    margin-right: 18px !important;
+    color: var(--sidebar-text) !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.branch_select {
+    min-width: 300px !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+a.branch_hover:hover {
+    background-color: var(--sidebar-hover) !important;
+}
+
+.shadow {
+    height: 25px;
+    margin: -26px;
+    min-width: 320px;
+    background-color: transparent;
+}
+
+.modal-content_nopad {
+    position: relative;
+}
+
+.modal-content_nopad .modal_btn {
+    position: absolute;
+    top: 2px;
+    right: 0;
+}
+
+/* ============================================================
+   Theme toggle icon in navbar
+   ============================================================ */
+
+#theme_toggle_btn {
+    cursor: pointer;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+/* Smooth color transitions on theme switch */
+body, nav, .side-nav, #slide-out, .dropdown-content,
+.collapsible, .collapsible-header, .collapsible-body,
+.modal, li.collection-item, .collection {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Waves button overrides to follow theme accent */
+.waves-effect.waves-blue .waves-ripple {
+    background-color: var(--accent);
+}
